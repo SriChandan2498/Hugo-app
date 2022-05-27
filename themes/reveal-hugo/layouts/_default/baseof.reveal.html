@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{ partial "layout/head" . }}
+    {{ partial "layout/theme" . }}
+    <!-- To insert markup before the closing head tag for all presentations,
+         create layouts/partials/reveal-hugo/head.html -->
+    {{- partial "reveal-hugo/head" . -}}
+    <!-- To insert markup at the end of the head tag for a specific presentation,
+         create layouts/partials/{section}/reveal-hugo/head.html -->
+    {{- $sectionHeadPartial := printf "%s/reveal-hugo/head" (.Page.Section | default "home") -}}
+    {{- if fileExists (printf "layouts/partials/%s.html" $sectionHeadPartial) -}}{{ partial $sectionHeadPartial . }}{{- end }}
+    <style>
+      #links 
+      {
+        height:100px; 
+        width: 800px;
+        margin-top: 25px;
+        /* margin-right: 150px; */
+        margin-left: 250px;
+      }
+    </style>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">   -->
+    </head>
+  <body>
+    <button onclick="getTOC()">Table of Contents</button>
+    <div id="tableOfContents" onclick="closeDropdown()"></div>
+    {{ if .Param "logo.src" }}
+    <style>
+      #logo {
+        position: absolute;
+        top: {{ if .Param "logo.top"}}{{ .Param "logo.top" }}{{ else if .Param "logo.diag" }}{{ .Param "logo.diag" }}{{ else }}1%{{ end }};
+        left: {{ if .Param "logo.top"}}{{ .Param "logo.left" }}{{ else if .Param "logo.diag" }}{{ .Param "logo.diag" }}{{ else }}1%{{ end }};
+        width: {{ if .Param "logo.width"}}{{ .Param "logo.width" }}{{ else }}15%{{ end }};
+      }
+    </style>
+    <img id="logo" src="{{ .Param "logo.src" }}" alt="{{ .Param "logo.alt" }}">
+    {{ end }}
+    
+    <div class="reveal">
+      <!-- <img src="./unnamed.jpg" id="progressbar"> -->
+      <div class="slides">
+        {{- block "main" . -}}{{- end -}}
+      </div>
+      <!-- To insert markup at the end of the .reveal tag for all presentations,
+           create layouts/partials/reveal-hugo/end.html -->
+      {{- partial "reveal-hugo/end" . -}}
+      <!-- To insert markup at the end of the .reveal tag for a specific presentation,
+           create layouts/partials/{section}/reveal-hugo/end.html -->
+      {{- $sectionHeadPartial := printf "%s/reveal-hugo/end" (.Page.Section | default "home") -}}
+      {{- if fileExists (printf "layouts/partials/%s.html" $sectionHeadPartial) -}}{{ partial $sectionHeadPartial . }}{{- end }}
+    </div>
+    {{- partial "layout/javascript" . }}
+    <!-- To insert markup before the closing body tag for all presentations,
+         create layouts/partials/reveal-hugo/body.html -->
+    {{- partial "reveal-hugo/body" . }}
+    <!-- To insert markup at the end of the head tag for a specific presentation,
+         create layouts/partials/{section}/reveal-hugo/body.html -->
+    {{- $sectionBodyPartial := printf "%s/reveal-hugo/body" (.Page.Section | default "home") -}}
+    {{- if fileExists (printf "layouts/partials/%s.html" $sectionBodyPartial) -}}{{ partial $sectionBodyPartial . }}{{- end }}
+  <script>   
+    function handleQuiz(){
+      // console.log("Hit!")
+      let inp = document.getElementById("answer")
+      // console.log(inp.value)
+      const btn = document.getElementsByClassName("navigate-down")
+      if(inp.value.toLowerCase() != "true")
+      {
+        btn[0].className = "navigate-down enabled"
+        btn[0].disabled = true
+        document.getElementById("quizFeedback").innerHTML = `<h6>Please enter correct answer</h6>`
+      }
+      else
+      {
+        document.getElementById("quizFeedback").innerHTML = "Correct! Please proceed!"
+        btn[0].className = "navigate-down enabled highlight"
+        btn[0].disabled = false
+      }
+    }
+    function getTOC(){
+      let x = document.getElementById("tableOfContents")
+      // x.innerHTML = `<p>Opened</p>`
+      const HORIZONTAL_SLIDES_SELECTOR = '.slides>section' 
+      let pages = document.querySelector( '.reveal' ).querySelectorAll( HORIZONTAL_SLIDES_SELECTOR );
+      // console.log(pages)
+      let res = "<ul>"
+      for(let i = 0; i < pages.length; i++)
+      {
+        // console.log(pages[i])
+        let link = "/"
+        let title = pages[i].innerText.trim().split("\n")[0].toUpperCase()
+        // console.log(title)
+        if(i != 0)
+        {
+          link = `/${i}`
+        }
+        res += `<li><h3><a href="#${link}">${title}</a></h3></li>`
+        // res += `<li><h3><a href="#${link}">Slide-${i+1}</a></h3></li>`
+      }
+      // console.log(res+"</ul>")
+      x.innerHTML = res+"</ul>"
+    }
+
+    function closeDropdown()
+    {
+      // console.log("hit")
+      document.getElementById("tableOfContents").innerHTML = ``
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+</body>
+</html>
