@@ -14,20 +14,69 @@
 <link rel="stylesheet" href="/highlight-js/default.min.css">
     
     <style>
-      #links 
-      {
-        height:100px; 
-        width: 800px;
-        margin-top: 25px;
-         
-        margin-left: 250px;
+      .dropbtn {
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        background-color: #e7e7e7; 
+        color: black;
       }
+
+       
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+       
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+       
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+       
+      .dropdown-content a:hover {background-color: #f1f1f1}
+
+       
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+       
+      .dropdown:hover .dropbtn {
+         
+        background-color: #918f8f;
+      }
+
+      .flexbox{
+        display: flex;
+        flex-wrap: wrap;
+      }
+</style>
     </style>
     
     </head>
-  <body>
-    <button onclick="getTOC()">Table of Contents</button>
-    <div id="tableOfContents" onclick="closeDropdown()"></div>
+  <body onload="getTOC()">
+    <div class="flexbox">
+      <div class="dropdown">
+        <button class="dropbtn">Table of Contents</button>
+        <div class="dropdown-content" id="tableOfContents"></div>
+      </div>
+    </div>
+      
     
     
     <div class="reveal">
@@ -200,7 +249,9 @@
         btn[0].disabled = false
       }
     }
+    
     function getTOC(){
+      console.log("Hit!")
       let x = document.getElementById("tableOfContents")
       // x.innerHTML = `<p>Opened</p>`
       const HORIZONTAL_SLIDES_SELECTOR = '.slides>section' 
@@ -224,10 +275,14 @@
       x.innerHTML = res+"</ul>"
     }
 
+    function openTOC(){
+      document.getElementById("tableOfContents").style.visibility = "visible";
+    }
+
     function closeDropdown()
     {
       
-      document.getElementById("tableOfContents").innerHTML = ``
+      document.getElementById("tableOfContents").style.visibility = "hidden";
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
