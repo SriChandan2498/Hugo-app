@@ -3,20 +3,20 @@
   <head>
 	<meta name="generator" content="Hugo 0.98.0" />
     <meta charset="utf-8">
-<title>My presentation</title>
+<title>Digital Learning</title>
 
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/reveal-js/css/reset.css">
-<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/black.css" id="theme">
+<link rel="stylesheet" href="/reveal-js/css/reveal.css"><link rel="stylesheet" href="/reveal-js/css/theme/white.css" id="theme">
 <link rel="stylesheet" href="/highlight-js/default.min.css">
     
     <style>
-      .reveal .slides .dropbtn {
+      .dropbtn {
         padding: 16px;
-        font-size: 16px;
+        font-size: 20px;
         border: none;
         cursor: pointer;
         background-color: #e7e7e7; 
@@ -26,41 +26,46 @@
       }
 
        
-      .reveal .slides .dropdown {
+      .dropdown {
         position: relative;
         display: inline-block;
+        float: right;
+         
       }
 
-       
-      .reveal .slides .dropdown-content {
+         
+      .dropdown-content {
         display: none;
         position: absolute;
         background-color: #f9f9f9;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
+        right: 0;
         
       }
       
        
-      .reveal .slides .dropdown-content a {
+      .dropdown-content a {
         color: black;
         padding: 12px 16px;
+        font-size: 20px;
         text-decoration: none;
         display: block;
         font-family: Arial;
       }
 
        
-      .reveal .slides .dropdown-content a:hover {background-color: #f1f1f1}
+      .dropdown-content a:hover {background-color: #f1f1f1}
 
        
-      .reveal .slides .dropdown:hover .dropdown-content {
+      .dropdown:hover .dropdown-content{
+       
         display: block;
       }
 
        
-      .reveal .slides .dropdown:hover .dropbtn {
+      .dropdown:hover .dropbtn {
          
         background-color: #918f8f;
       }
@@ -69,7 +74,10 @@
     
     </head>
   <body onload="getTOC()">
-      
+      <div class="dropdown">
+        <button class="dropbtn">Table of Contents</button>
+        <div class="dropdown-content" id="tableOfContents"></div>
+      </div>
 
     
     
@@ -81,7 +89,9 @@
     <section><h2 id="hello-world">Hello world!</h2>
 <p>This is my first slide.</p>
 </section><section>
-
+<h2 id="hello-mars">Hello Mars</h2>
+<p>This is my second slide.</p>
+<!-- 
 
 <section data-shortcode-section>
 <h2 id="logical-operators">Logical operators</h2>
@@ -116,7 +126,7 @@
         <input type="radio" value="Error">Error</input>
 </div>
 
-</section>
+</section> -->
 </section><section>
 <h2 id="hey-mercury">Hey Mercury</h2>
 <p>This is my third slide!</p>
@@ -147,7 +157,7 @@
   document.getElementsByTagName('head')[0].appendChild(link);
 </script>
 
-<script type="application/json" id="reveal-hugo-site-params">null</script>
+<script type="application/json" id="reveal-hugo-site-params">{"slide_number":"c/t","theme":"white"}</script>
 <script type="application/json" id="reveal-hugo-page-params">null</script>
 
 <script src="/reveal-js/js/reveal.js"></script>
@@ -244,11 +254,41 @@
       }
     }
     
+    // function getTOC(){
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     function getTOC(){
-      // console.log("Hit!")
-      
-      let x = document.createElement("div")
-      x.className = "dropdown";
+      console.log("Hit!")
+      let x = document.getElementById("tableOfContents")
       
       const HORIZONTAL_SLIDES_SELECTOR = '.slides>section' 
       let pages = document.querySelector( '.reveal' ).querySelectorAll( HORIZONTAL_SLIDES_SELECTOR );
@@ -264,17 +304,13 @@
         {
           link = `/${i}`
         }
-        res += `<a href="#${link}">${title}</a>`
-        // res += `<li><h3><a href="#${link}">Slide-${i+1}</a></h3></li>`
+        res += `<h3><a href="#${link}">${title}</a></h3>`
+        
       }
-      // console.log(res+"</ul>")
       
-      x.innerHTML =`<button class="dropbtn">Table of Contents</button><div class="dropdown-content" id="tableOfContents">`+res+"</ul>"
-      const element = document.querySelector( '.reveal' ).querySelector(".slides")
-      console.log(element)
-      element.appendChild(x);
-      // element.insertBefore(x,element);
+      x.innerHTML = res
     }
+    
   </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
