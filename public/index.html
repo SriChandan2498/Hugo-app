@@ -14,69 +14,63 @@
 <link rel="stylesheet" href="/highlight-js/default.min.css">
     
     <style>
-      .dropbtn {
+      .reveal .slides .dropbtn {
         padding: 16px;
         font-size: 16px;
         border: none;
         cursor: pointer;
         background-color: #e7e7e7; 
         color: black;
+        right: 0;
+        font-family: Arial;
       }
 
        
-      .dropdown {
+      .reveal .slides .dropdown {
         position: relative;
         display: inline-block;
       }
 
        
-      .dropdown-content {
+      .reveal .slides .dropdown-content {
         display: none;
         position: absolute;
         background-color: #f9f9f9;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
+        
       }
-
+      
        
-      .dropdown-content a {
+      .reveal .slides .dropdown-content a {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
+        font-family: Arial;
       }
 
        
-      .dropdown-content a:hover {background-color: #f1f1f1}
+      .reveal .slides .dropdown-content a:hover {background-color: #f1f1f1}
 
        
-      .dropdown:hover .dropdown-content {
+      .reveal .slides .dropdown:hover .dropdown-content {
         display: block;
       }
 
        
-      .dropdown:hover .dropbtn {
+      .reveal .slides .dropdown:hover .dropbtn {
          
         background-color: #918f8f;
-      }
-
-      .flexbox{
-        display: flex;
-        flex-wrap: wrap;
       }
 </style>
     </style>
     
     </head>
   <body onload="getTOC()">
-    <div class="flexbox">
-      <div class="dropdown">
-        <button class="dropbtn">Table of Contents</button>
-        <div class="dropdown-content" id="tableOfContents"></div>
-      </div>
-    </div>
       
+
     
     
     <div class="reveal">
@@ -251,13 +245,15 @@
     }
     
     function getTOC(){
-      console.log("Hit!")
-      let x = document.getElementById("tableOfContents")
-      // x.innerHTML = `<p>Opened</p>`
+      // console.log("Hit!")
+      
+      let x = document.createElement("div")
+      x.className = "dropdown";
+      
       const HORIZONTAL_SLIDES_SELECTOR = '.slides>section' 
       let pages = document.querySelector( '.reveal' ).querySelectorAll( HORIZONTAL_SLIDES_SELECTOR );
-      // console.log(pages)
-      let res = "<ul>"
+      
+      let res = ""
       for(let i = 0; i < pages.length; i++)
       {
         
@@ -268,21 +264,16 @@
         {
           link = `/${i}`
         }
-        res += `<li><h3><a href="#${link}">${title}</a></h3></li>`
+        res += `<a href="#${link}">${title}</a>`
         // res += `<li><h3><a href="#${link}">Slide-${i+1}</a></h3></li>`
       }
       // console.log(res+"</ul>")
-      x.innerHTML = res+"</ul>"
-    }
-
-    function openTOC(){
-      document.getElementById("tableOfContents").style.visibility = "visible";
-    }
-
-    function closeDropdown()
-    {
       
-      document.getElementById("tableOfContents").style.visibility = "hidden";
+      x.innerHTML =`<button class="dropbtn">Table of Contents</button><div class="dropdown-content" id="tableOfContents">`+res+"</ul>"
+      const element = document.querySelector( '.reveal' ).querySelector(".slides")
+      console.log(element)
+      element.appendChild(x);
+      // element.insertBefore(x,element);
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -222,15 +222,16 @@ body {
 
 .reveal .controls {
   display: none;
-  position: absolute;
+  /* position: absolute; */
   top: auto;
-  bottom: 12px;
+  bottom: 50px;
   right: 12px;
   left: auto;
   z-index: 11;
   color: #000;
   pointer-events: none;
   font-size: 10px; }
+  
   .reveal .controls button {
     position: absolute;
     padding: 0;
