@@ -1,7 +1,9 @@
 +++
-title = "My presentation"
+title = "Digital Learning"
 outputs = ["Reveal"]
 +++
+
+
 
 ## Hello world!
 
@@ -9,7 +11,10 @@ This is my first slide.
 
 ---
 
-{{% section %}}
+## Hello Mars
+
+This is my second slide.
+<!-- {{% section %}}
 
 ## Logical operators
 
@@ -32,7 +37,7 @@ This is my first slide.
 
 {{% shortanswer %}}
 
-{{% /section %}}
+{{% /section %}} -->
 
 ---
 ## Hey Mercury
