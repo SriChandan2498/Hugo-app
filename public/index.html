@@ -14,6 +14,14 @@
 <link rel="stylesheet" href="/highlight-js/default.min.css">
     
     <style>
+      .navbar{
+        display: flex;
+        justify-content :space-between;
+      }
+      .navbar #courseTitle{
+        font-size: 25px;
+      }
+
       .dropbtn {
         padding: 16px;
         font-size: 15px;
@@ -74,11 +82,15 @@
     
     </head>
   <body onload="getTOC()">
+    <div class="navbar">
+      <div id="courseTitle">
+        <h1>Course Name</h1>
+      </div>
       <div class="dropdown">
         <button class="dropbtn">Table of Contents</button>
         <div class="dropdown-content" id="tableOfContents"></div>
       </div>
-
+    </div>
     
     
     <div class="reveal">
