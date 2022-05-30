@@ -14,7 +14,24 @@ This is my first slide.
 ## Hello Mars
 
 This is my second slide.
-<!-- {{% section %}}
+
+---
+## Hey Mercury
+
+This is my third slide!
+
+--- 
+## Hey Venus
+
+This is my fourth slide!
+
+---
+## Hey Jupiter
+
+This is my fifth slide!
+
+<!-- ---
+{{% section %}}
 
 ## Logical operators
 
@@ -39,19 +56,5 @@ This is my second slide.
 
 {{% /section %}} -->
 
----
-## Hey Mercury
-
-This is my third slide!
-
---- 
-## Hey Venus
-
-This is my fourth slide!
-
----
-## Hey Jupiter
-
-This is my fifth slide!
 
 
